@@ -21,12 +21,12 @@
     &quot;assignee&quot;: &quot;pranaypkadu&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/pranaypkadu/Youtube-Playlist-Duration-Calculator-.git&quot;,
-    &quot;accountId&quot;: &quot;7698f854-b4c3-40c1-ad88-3af051385604&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/BackendArchitectX/Youtube-Playlist-Duration-Calculator-.git",
+    "accountId": "7698f854-b4c3-40c1-ad88-3af051385604"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -85,7 +85,7 @@
       <updated>1736504829305</updated>
       <workItem from="1767343267913" duration="3134000" />
       <workItem from="1767349410042" duration="3244000" />
-      <workItem from="1767365371331" duration="313000" />
+      <workItem from="1767365371331" duration="998000" />
     </task>
     <servers />
   </component>
