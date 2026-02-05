@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'http://localhost:8080/api/playlist';
+const API_BASE_URL = '/api/playlist';
 
 // DOM Elements
 const form = document.getElementById('playlistForm');
@@ -62,7 +62,6 @@ function setLoading(isLoading) {
 
 // Display results
 function displayResults(data) {
-  // Update duration values
   totalLength.textContent = data.totalLength || '-';
   averageLength.textContent = data.averageLength || '-';
   at1_25x.textContent = data.at1_25x || '-';
@@ -70,30 +69,22 @@ function displayResults(data) {
   at1_75x.textContent = data.at1_75x || '-';
   at2_00x.textContent = data.at2_00x || '-';
 
-  // Show results
   results.classList.remove('hidden');
-
-  // Smooth scroll to results
   results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // Fetch playlist duration from API
 async function fetchPlaylistDuration(playlistId, fromIndex, toIndex) {
-  // Build query parameters
   let queryParams = `?playlistId=${encodeURIComponent(playlistId)}`;
-
   if (fromIndex) queryParams += `&fromIndex=${fromIndex}`;
   if (toIndex) queryParams += `&toIndex=${toIndex}`;
 
   const response = await fetch(`${API_BASE_URL}/duration${queryParams}`);
 
-  // Try to parse JSON always (backend returns JSON for errors too)
   let payload = null;
   try {
     payload = await response.json();
-  } catch (e) {
-    // ignore JSON parse errors
-  }
+  } catch (e) {}
 
   if (!response.ok) {
     const msg = payload?.message || payload?.error || 'Failed to fetch playlist duration';
@@ -116,7 +107,6 @@ form.addEventListener('submit', async (e) => {
     const toIndex = toIndexInput.value ? parseInt(toIndexInput.value, 10) : null;
 
     if (!playlistUrl) throw new Error('Please enter a playlist URL or ID');
-
     if (fromIndex && fromIndex < 1) throw new Error('From index must be at least 1');
     if (toIndex && toIndex < 1) throw new Error('To index must be at least 1');
     if (fromIndex && toIndex && fromIndex > toIndex) throw new Error('From index cannot be greater than To index');

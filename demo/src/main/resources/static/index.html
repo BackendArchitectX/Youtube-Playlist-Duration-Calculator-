@@ -8,149 +8,109 @@
 </head>
 <body>
   <div class="container">
-    <header>
+    <header class="hero">
+      <div class="logo-badge">
+        <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M27.42 3.12C27.11 1.95 26.21 1.05 25.04 0.74C22.88 0.18 14 0.18 14 0.18C14 0.18 5.12 0.18 2.96 0.74C1.79 1.05 0.89 1.95 0.58 3.12C0.02 5.28 0.02 10 0.02 10C0.02 10 0.02 14.72 0.58 16.88C0.89 18.05 1.79 18.95 2.96 19.26C5.12 19.82 14 19.82 14 19.82C14 19.82 22.88 19.82 25.04 19.26C26.21 18.95 27.11 18.05 27.42 16.88C27.98 14.72 27.98 10 27.98 10C27.98 10 27.98 5.28 27.42 3.12Z" fill="#FF0000"/>
+          <path d="M11.18 14.18L18.54 10L11.18 5.82V14.18Z" fill="white"/>
+        </svg>
+        <span class="tool-label">Playlist Calculator</span>
+      </div>
       <h1>YouTube Playlist Length</h1>
       <p class="subtitle">
-        Find the Youtube Playlist Length and Youtube Music Playlist Length in a Single click.
-        Get a fast response, simple & free to use.
+        Calculate total duration and watch times at different speeds for any YouTube or YouTube Music playlist.
       </p>
     </header>
 
     <main class="calculator-section">
-      <form id="playlistForm">
-        <div class="form-group">
-          <label for="playlistUrl">Playlist URL</label>
-          <input
-            type="text"
-            id="playlistUrl"
-            placeholder="Enter a YouTube playlist or YouTube Music Playlist url"
-            required
-          />
-        </div>
-
-        <div class="range-inputs">
+      <div class="card">
+        <form id="playlistForm">
           <div class="form-group">
-            <label for="fromIndex">From (Optional)</label>
+            <label for="playlistUrl">Playlist URL</label>
             <input
-              type="number"
-              id="fromIndex"
-              placeholder="From"
-              min="1"
+              type="text"
+              id="playlistUrl"
+              placeholder="https://www.youtube.com/playlist?list=..."
+              required
             />
           </div>
 
-          <div class="form-group">
-            <label for="toIndex">To (Optional)</label>
-            <input
-              type="number"
-              id="toIndex"
-              placeholder="To"
-              min="1"
-            />
+          <div class="range-inputs">
+            <div class="form-group">
+              <label for="fromIndex">From (Optional)</label>
+              <input type="number" id="fromIndex" placeholder="1" min="1" />
+            </div>
+
+            <div class="form-group">
+              <label for="toIndex">To (Optional)</label>
+              <input type="number" id="toIndex" placeholder="Last" min="1" />
+            </div>
           </div>
+
+          <button type="submit" class="btn-calculate" id="calculateBtn">
+            <span id="btnText">Calculate</span>
+            <span id="btnLoader" class="loader hidden"></span>
+          </button>
+        </form>
+
+        <div class="info-box">
+          <div class="info-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>How it works</span>
+          </div>
+          <ul class="info-list">
+            <li>Only public videos are counted (YouTube API limitation)</li>
+            <li>Specify a range to calculate only a section of the playlist</li>
+            <li>Leave "From" empty to start from the first video</li>
+            <li>Leave "To" empty to include all videos until the end</li>
+          </ul>
         </div>
 
-        <button type="submit" class="btn-calculate" id="calculateBtn">
-          <span id="btnText">Calculate</span>
-          <span id="btnLoader" class="loader hidden"></span>
-        </button>
-      </form>
+        <div id="errorMessage" class="error-message hidden"></div>
 
-      <div class="note-section">
-        <div class="note-header">
-          <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          <span>Note:</span>
-        </div>
+        <div id="results" class="results hidden">
+          <h3 class="results-title">Results</h3>
+          <div class="duration-grid">
+            <div class="duration-card featured">
+              <div class="duration-label">Total Duration</div>
+              <div class="duration-value" id="totalLength">-</div>
+            </div>
 
-        <ul class="note-list">
-          <li>
-            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            This tool only counts public videos. We cannot include hidden or deleted videos because YouTube does not share that information in Official API.
-          </li>
+            <div class="duration-card">
+              <div class="duration-label">Average per Video</div>
+              <div class="duration-value" id="averageLength">-</div>
+            </div>
 
-          <li>
-            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            You don't have to calculate the whole playlist. You can measure just a specific section using the "From" and "To" boxes.
-          </li>
+            <div class="duration-card">
+              <div class="duration-label">At 1.25× speed</div>
+              <div class="duration-value" id="at1_25x">-</div>
+            </div>
 
-          <li>
-            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Leave "From" empty? We start at the very first video.
-          </li>
+            <div class="duration-card">
+              <div class="duration-label">At 1.5× speed</div>
+              <div class="duration-value" id="at1_50x">-</div>
+            </div>
 
-          <li>
-            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Leave "To" empty? We count all the way to the last video.
-          </li>
+            <div class="duration-card">
+              <div class="duration-label">At 1.75× speed</div>
+              <div class="duration-value" id="at1_75x">-</div>
+            </div>
 
-          <li>
-            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Example: If you want to check the length of videos 11 through 40, just type 11 in the "From" box and 40 in the "To" box.
-          </li>
-        </ul>
-      </div>
-
-      <div id="errorMessage" class="error-message hidden"></div>
-
-      <div id="results" class="results hidden">
-        <div class="duration-grid">
-          <div class="duration-card active">
-            <div class="duration-label">Playlist Duration</div>
-            <div class="duration-value" id="totalLength">-</div>
-          </div>
-
-          <div class="duration-card">
-            <div class="duration-label">Average Duration</div>
-            <div class="duration-value" id="averageLength">-</div>
-          </div>
-
-          <div class="duration-card">
-            <div class="duration-label">At 1.25X speed</div>
-            <div class="duration-value" id="at1_25x">-</div>
-          </div>
-
-          <div class="duration-card">
-            <div class="duration-label">At 1.5X speed</div>
-            <div class="duration-value" id="at1_50x">-</div>
-          </div>
-
-          <div class="duration-card">
-            <div class="duration-label">At 1.75X speed</div>
-            <div class="duration-value" id="at1_75x">-</div>
-          </div>
-
-          <div class="duration-card">
-            <div class="duration-label">At 2X speed</div>
-            <div class="duration-value" id="at2_00x">-</div>
+            <div class="duration-card">
+              <div class="duration-label">At 2× speed</div>
+              <div class="duration-value" id="at2_00x">-</div>
+            </div>
           </div>
         </div>
       </div>
+
+      <footer class="footer">
+        Powered by YouTube Data API v3 • Spring Boot Backend
+      </footer>
     </main>
   </div>
 
