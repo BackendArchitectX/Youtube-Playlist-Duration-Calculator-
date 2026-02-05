@@ -32,9 +32,9 @@ Output:
   ⚡ Speed 1.5x:    6 hours, 17 minutes, 36 seconds
   ⚡ Speed 1.75x:   5 hours, 23 minutes, 40 seconds
   🚀 Speed 2x:      4 hours, 43 minutes, 12 seconds
-🚀 Quick Start (5 Minutes)
+🚀 Quick Start
 1️⃣ Prerequisites
-Java 11+ → Download
+Java 17+ → Download
 
 Maven 3.6+ → Download
 
@@ -46,7 +46,7 @@ bash
 git clone https://github.com/BackendArchitectX/Youtube-Playlist-Duration-Calculator-.git
 cd Youtube-Playlist-Duration-Calculator-/demo
 
-# Create config file with API key (port is 8080 by default)
+# Create config file with API key
 echo "youtube.api.key=YOUR_API_KEY_HERE" > src/main/resources/application.properties
 
 # Build project
@@ -56,6 +56,14 @@ mvn clean install
 mvn spring-boot:run
 ✅ Done! API is running on http://localhost:8080
 
+📖 Usage
+Making a Request
+bash
+GET http://localhost:8080/api/playlist/{playlistId}
+Example:
+
+bash
+curl http://localhost:8080/api/playlist/PL0zysOflRCekMr91amXBNwWku4PmeFaFD
 Example Response
 json
 {
@@ -65,12 +73,9 @@ json
   "at1_75x": "0 days, 5 hours, 23 minutes, 40 seconds",
   "at2_00x": "0 days, 4 hours, 43 minutes, 12 seconds"
 }
-
-
-
 🔧 Configuration
 Set Your API Key
-Option 1: Properties File (recommended)
+Option 1: Properties File (Recommended)
 
 text
 # src/main/resources/application.properties
@@ -82,178 +87,219 @@ bash
 # Linux/Mac
 export YOUTUBE_API_KEY=YOUR_API_KEY_HERE
 mvn spring-boot:run
-
+powershell
 # Windows (PowerShell)
 $env:YOUTUBE_API_KEY="YOUR_API_KEY_HERE"
 mvn spring-boot:run
 Change Port
 text
 # src/main/resources/application.properties
-server.port=8080
+server.port=8081
 🚀 Deployment
 As JAR File
 bash
+# Build executable JAR
 mvn clean package
-java -jar target/*.jar
+
+# Run the JAR
+java -jar target/demo-0.0.1-SNAPSHOT.jar
 With Docker
+Dockerfile:
+
 text
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jre-slim
 WORKDIR /app
 COPY target/*.jar app.jar
 ENV YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
+Build and Run:
+
 bash
-docker build -t youtube-calc .
-docker run -e YOUTUBE_API_KEY=YOUR_KEY -p 8080:8080 youtube-calc
+# Build Docker image
+docker build -t youtube-playlist-calculator .
+
+# Run container
+docker run -e YOUTUBE_API_KEY=YOUR_KEY -p 8080:8080 youtube-playlist-calculator
 📚 API Documentation
+Endpoint
+text
+GET /api/playlist/{playlistId}
+Path Parameters
+Parameter	Type	Required	Description
+playlistId	String	Yes	YouTube playlist ID
 Response Fields
-Field	Meaning
-totalLength	Total watch time at normal speed (1x)
-at1_25x	Estimated time if you watch at 1.25x speed
-at1_50x	Estimated time if you watch at 1.5x speed
-at1_75x	Estimated time if you watch at 1.75x speed
-at2_00x	Estimated time if you watch at 2x speed
+Field	Type	Description
+totalLength	String	Total watch time at normal speed (1x)
+at1_25x	String	Estimated time at 1.25x speed
+at1_50x	String	Estimated time at 1.5x speed
+at1_75x	String	Estimated time at 1.75x speed
+at2_00x	String	Estimated time at 2x speed
 Status Codes
 Code	Meaning
-200	✅ Success
-400	❌ Invalid playlist ID
-401	❌ API key missing/invalid
-403	❌ API quota exceeded
-500	❌ Server error
+200	✅ Success - Playlist duration calculated
+400	❌ Bad Request - Invalid playlist ID
+401	❌ Unauthorized - API key missing/invalid
+403	❌ Forbidden - API quota exceeded
+404	❌ Not Found - Playlist doesn't exist
+500	❌ Internal Server Error
 ❓ Common Issues
-401 "Unauthorized"
+🔴 401 "Unauthorized"
 Problem: Your YouTube API key is missing, invalid, or not loaded by the app.
 
 Solution:
 
 bash
-# Check application.properties has correct key
+# Verify API key in application.properties
 cat src/main/resources/application.properties
 
 # If missing, add it:
 echo "youtube.api.key=YOUR_ACTUAL_KEY" > src/main/resources/application.properties
 
-# (Optional) ensure you are running on port 8080
-echo "server.port=8080" >> src/main/resources/application.properties
-
-# Restart
+# Restart application
 mvn spring-boot:run
-403 "Quota Exceeded"
-Problem: You've hit the YouTube API daily quota
+🔴 403 "Quota Exceeded"
+Problem: You've exceeded the YouTube API daily quota (10,000 units/day by default).
 
 Solution:
 
-Check quota in Google Cloud Console
+Check quota usage in Google Cloud Console
 
-Wait until quota resets (typically daily)
+Wait until quota resets (resets daily at midnight Pacific Time)
 
 Request quota increase if needed
 
-Port 8080 Already in Use
-Problem: Another app is using port 8080
+🔴 Port 8080 Already in Use
+Problem: Another application is using port 8080.
 
 Solution:
 
 text
 # src/main/resources/application.properties
 server.port=8081
-Maven Command Not Found
-Problem: Maven not installed
+Or kill the process:
+
+bash
+# Linux/Mac
+lsof -ti:8080 | xargs kill -9
+
+# Windows (PowerShell)
+netstat -ano | findstr :8080
+taskkill /PID <PID> /F
+🔴 Maven Command Not Found
+Problem: Maven is not installed or not in PATH.
 
 Solution:
 
 bash
-mvn -version  # Check if installed
+# Check if Maven is installed
+mvn -version
 
-# If not, download from:
+# If not installed, download from:
 # https://maven.apache.org/download.cgi
 
+# Add Maven to PATH (Linux/Mac)
+export PATH=/path/to/maven/bin:$PATH
 
-## 📁 Project Structure
-
-```
-### Project Structure
-
+# Add Maven to PATH (Windows)
+# Add C:\path\to\maven\bin to System Environment Variables
+📁 Project Structure
+text
 demo/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/example/demo/
 │   │   │   ├── controller/        # REST endpoints
 │   │   │   ├── service/           # Business logic
-│   │   │   ├── model/             # DTOs
-│   │   │   └── config/            # Configuration
+│   │   │   ├── model/             # DTOs & response models
+│   │   │   ├── exception/         # Custom exceptions & global handlers
+│   │   │   └── config/            # Configuration classes
 │   │   └── resources/
 │   │       ├── static/            # Frontend (HTML/CSS/JS)
 │   │       └── application.properties
-│   └── test/                      # Unit tests
+│   └── test/
+│       └── java/                  # Unit & integration tests
 └── pom.xml                        # Maven dependencies
+🛠️ Technology Stack
+Layer	Technology	Purpose
+Backend	Java 17	Modern language features (records, pattern matching)
+Spring Boot 3.2.2	Application framework & auto-configuration
+Spring Web	RESTful web services
+YouTube Data API v3	Fetch playlist & video metadata
+Frontend	HTML5/CSS3/JavaScript	Responsive user interface
+Fetch API	Asynchronous HTTP requests
+Build	Maven	Dependency management & build automation
+Deployment	Docker	Containerization & portability
+🎨 Design Patterns
+MVC (Model-View-Controller): Clear separation of concerns
 
-```
+Dependency Injection: Loose coupling via Spring IoC container
 
-### Technology Stack
+DTO Pattern: Data transfer between layers
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Backend** | Java 17 | Modern language features (records, pattern matching) |
-| | Spring Boot 3.2.2 | Application framework & auto-configuration |
-| | Spring Web | RESTful web services |
-| | YouTube Data API v3 | Playlist & video metadata |
-| **Frontend** | HTML5/CSS3/JavaScript | Responsive UI |
-| | Fetch API | Asynchronous HTTP requests |
-| **Build** | Maven | Dependency management & build automation |
-| **Deployment** | Docker | Containerization |
+RESTful Architecture: Stateless client-server communication
 
-### Design Patterns
-
-- **MVC (Model-View-Controller):** Clear separation of concerns
-- **Dependency Injection:** Loose coupling via Spring IoC
-- **DTO Pattern:** Data transfer between layers
-- **RESTful Architecture:** Stateless client-server communication
-
----
+Exception Handling: Global exception handlers for consistent error responses
 
 💡 Pro Tips
-📌 Save URLs with IDs - Bookmark requests to check playlists anytime
-
-⚡ Use 2x speed - Save time on slower videos
-
-🔑 Never commit API keys - Use environment variables in production
-
-📱 Integrate easily - Use JavaScript/Python examples in your apps
+📌 Bookmark Playlists - Save playlist IDs to check durations anytime
+⚡ Speed Up Learning - Use 1.5x-2x speed for faster content consumption
+🔑 Secure API Keys - Never commit keys to Git; use environment variables in production
+📱 Easy Integration - Simple REST API works with any programming language
+🎯 Batch Processing - Check multiple playlists to plan your learning schedule
 
 🤝 Contributing
-Found a bug? Want to improve it? We'd love your help!
+Found a bug? Want to add features? Contributions are welcome!
 
 bash
-1. Fork the repository
-2. Create a feature branch: git checkout -b feature/YourFeature
-3. Commit changes: git commit -m 'Add YourFeature'
-4. Push to branch: git push origin feature/YourFeature
-5. Open a Pull Request
-📄 License
-MIT License - See LICENSE for details.
+# 1. Fork the repository
+# 2. Create feature branch
+git checkout -b feature/AmazingFeature
 
-You can use this project for commercial, personal, or educational purposes!
+# 3. Commit changes
+git commit -m 'Add AmazingFeature'
+
+# 4. Push to branch
+git push origin feature/AmazingFeature
+
+# 5. Open Pull Request
+Please ensure:
+
+Code follows Spring Boot best practices
+
+Unit tests are included
+
+Documentation is updated
+
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+You are free to use this project for:
+
+✅ Commercial purposes
+
+✅ Personal projects
+
+✅ Educational purposes
+
+✅ Modification and distribution
 
 🔗 Useful Links
-📺 YouTube API → https://developers.google.com/youtube/v3/docs
-
-🚀 Spring Boot → https://docs.spring.io/spring-boot/docs/
-
-🏗️ Maven → https://maven.apache.org/guides/
-
-☕ Java → https://docs.oracle.com/javase/tutorial/
+📺 YouTube Data API → https://developers.google.com/youtube/v3/docs
+🚀 Spring Boot Docs → https://docs.spring.io/spring-boot/docs/
+🏗️ Maven Documentation → https://maven.apache.org/guides/
+☕ Java Tutorials → https://docs.oracle.com/javase/tutorial/
+🐳 Docker Hub → https://hub.docker.com/
 
 📧 Support & Contact
-Report Issues → https://github.com/BackendArchitectX/Youtube-Playlist-Duration-Calculator-/issues
-
-GitHub → https://github.com/BackendArchitectX
+💬 Report Issues → GitHub Issues
+👨‍💻 GitHub Profile → @BackendArchitectX
+📧 Email → Open an issue for support
 
 <div align="center">
 Made with ❤️ by BackendArchitectX
 
-⭐ If this helps you, please star the repository! ⭐
+⭐ If this project helps you, please star the repository! ⭐
 
 ⬆ Back to Top
 
