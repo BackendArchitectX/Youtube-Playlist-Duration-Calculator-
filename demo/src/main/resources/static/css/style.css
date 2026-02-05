@@ -1,4 +1,4 @@
-/* YouTube-inspired Light Theme */
+/* YouTube-inspired Light Theme - Enhanced */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,6 @@
 }
 
 :root {
-  /* YouTube brand colors */
   --yt-red: #ff0000;
   --yt-red-hover: #cc0000;
   --yt-black: #282828;
@@ -15,10 +14,8 @@
   --yt-gray-3: #e5e5e5;
   --yt-gray-4: #909090;
   --yt-gray-5: #606060;
-
   --text-primary: #030303;
   --text-secondary: #606060;
-
   --radius: 12px;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -33,7 +30,7 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -78,7 +75,7 @@ h1 {
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
   padding: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 /* Form */
@@ -282,11 +279,272 @@ h1 {
   font-weight: 600;
 }
 
+/* Section Titles */
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--yt-black);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+/* Steps Section */
+.steps-section {
+  margin: 50px 0;
+  padding: 40px 24px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.steps-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.step-card {
+  background: var(--yt-gray-1);
+  padding: 24px;
+  border-radius: 10px;
+  border: 1px solid var(--yt-gray-3);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--yt-red);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.step-card h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.tip-box {
+  margin-top: 14px;
+  padding: 12px;
+  background: #e0f2fe;
+  border-left: 3px solid #0284c7;
+  border-radius: 6px;
+  display: flex;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #0c4a6e;
+}
+
+.tip-box svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Features Section */
+.features-section {
+  margin: 50px 0;
+  padding: 40px 24px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--yt-gray-1);
+  padding: 24px;
+  border-radius: 10px;
+  border: 1px solid var(--yt-gray-3);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.feature-card h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* FAQ Section */
+.faq-section {
+  margin: 50px 0;
+  padding: 40px 24px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--yt-gray-1);
+  border: 1px solid var(--yt-gray-3);
+  border-radius: 10px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-primary);
+  list-style: none;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+.faq-question:hover {
+  background: white;
+}
+
+.faq-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--yt-red);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+details[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 20px 18px 62px;
+}
+
+.faq-answer p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 /* Footer */
 .footer {
+  margin-top: 50px;
+  padding: 40px 24px 20px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-brand .logo-badge {
+  margin-bottom: 12px;
+}
+
+.footer-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.footer-col h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin: 8px 0;
+}
+
+.footer-col ul li a {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-col ul li a:hover {
+  color: var(--yt-red);
+}
+
+.footer-bottom {
   text-align: center;
-  margin-top: 20px;
-  font-size: 0.85rem;
+  padding-top: 20px;
+  border-top: 1px solid var(--yt-gray-3);
+  font-size: 0.88rem;
   color: var(--text-secondary);
 }
 
@@ -299,6 +557,14 @@ h1 {
   .duration-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
@@ -306,7 +572,11 @@ h1 {
     padding: 16px 12px;
   }
 
-  .card {
+  .card,
+  .steps-section,
+  .features-section,
+  .faq-section,
+  .footer {
     padding: 20px;
   }
 
@@ -318,7 +588,19 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr;
+  }
+
   h1 {
     font-size: 1.6rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
   }
 }

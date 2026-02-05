@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YouTube Playlist Length Calculator</title>
+  <title>YouTube Playlist Length Calculator - Free & Fast</title>
+  <meta name="description" content="Calculate YouTube playlist duration instantly. Get watch times at different speeds (1.25x, 1.5x, 1.75x, 2x). Free, fast & no sign-up required." />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="container">
+    <!-- Hero Header -->
     <header class="hero">
       <div class="logo-badge">
         <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,10 +20,11 @@
       </div>
       <h1>YouTube Playlist Length</h1>
       <p class="subtitle">
-        Calculate total duration and watch times at different speeds for any YouTube or YouTube Music playlist.
+        Find the YouTube Playlist Length and YouTube Music Playlist Length in a Single click. Get a fast response, simple & free to use.
       </p>
     </header>
 
+    <!-- Calculator Section -->
     <main class="calculator-section">
       <div class="card">
         <form id="playlistForm">
@@ -38,12 +41,12 @@
           <div class="range-inputs">
             <div class="form-group">
               <label for="fromIndex">From (Optional)</label>
-              <input type="number" id="fromIndex" placeholder="1" min="1" />
+              <input type="number" id="fromIndex" placeholder="From" min="1" />
             </div>
 
             <div class="form-group">
               <label for="toIndex">To (Optional)</label>
-              <input type="number" id="toIndex" placeholder="Last" min="1" />
+              <input type="number" id="toIndex" placeholder="To" min="1" />
             </div>
           </div>
 
@@ -60,13 +63,14 @@
               <line x1="12" y1="16" x2="12" y2="12"></line>
               <line x1="12" y1="8" x2="12.01" y2="8"></line>
             </svg>
-            <span>How it works</span>
+            <span>Note:</span>
           </div>
           <ul class="info-list">
-            <li>Only public videos are counted (YouTube API limitation)</li>
-            <li>Specify a range to calculate only a section of the playlist</li>
-            <li>Leave "From" empty to start from the first video</li>
-            <li>Leave "To" empty to include all videos until the end</li>
+            <li>This tool only counts public videos. We cannot include hidden or deleted videos because YouTube does not share that information in Official API.</li>
+            <li>You don't have to calculate the whole playlist. You can measure just a specific section using the "From" and "To" boxes.</li>
+            <li>Leave "From" empty? We start at the very first video.</li>
+            <li>Leave "To" empty? We count all the way to the last video.</li>
+            <li>Example: If you want to check the length of videos 11 through 40, just type 11 in the "From" box and 40 in the "To" box.</li>
           </ul>
         </div>
 
@@ -76,40 +80,222 @@
           <h3 class="results-title">Results</h3>
           <div class="duration-grid">
             <div class="duration-card featured">
-              <div class="duration-label">Total Duration</div>
+              <div class="duration-label">Playlist Duration</div>
               <div class="duration-value" id="totalLength">-</div>
             </div>
 
             <div class="duration-card">
-              <div class="duration-label">Average per Video</div>
+              <div class="duration-label">Average Duration</div>
               <div class="duration-value" id="averageLength">-</div>
             </div>
 
             <div class="duration-card">
-              <div class="duration-label">At 1.25× speed</div>
+              <div class="duration-label">At 1.25X speed</div>
               <div class="duration-value" id="at1_25x">-</div>
             </div>
 
             <div class="duration-card">
-              <div class="duration-label">At 1.5× speed</div>
+              <div class="duration-label">At 1.5X speed</div>
               <div class="duration-value" id="at1_50x">-</div>
             </div>
 
             <div class="duration-card">
-              <div class="duration-label">At 1.75× speed</div>
+              <div class="duration-label">At 1.75X speed</div>
               <div class="duration-value" id="at1_75x">-</div>
             </div>
 
             <div class="duration-card">
-              <div class="duration-label">At 2× speed</div>
+              <div class="duration-label">At 2X speed</div>
               <div class="duration-value" id="at2_00x">-</div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- How-to Steps Section -->
+      <section class="steps-section">
+        <h2 class="section-title">Steps to find out YouTube Playlist Length</h2>
+        <p class="section-subtitle">Here are the simple & easy steps to follow for calculating the YouTube Playlist Length with our tool.</p>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Copy Your Playlist URL</h3>
+            <p>Go to <strong>YouTube</strong>/<strong>YouTube Music</strong>, and find the playlist and copy its link. If you are on mobile app, click "Share" icon and click "Copy link" option. Now, the playlist link is copied.</p>
+            <div class="tip-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>Pro tip: Make sure the playlist is public or unlisted. If your Playlist is private, temporarily make it unlisted, after calculation, you can make it private again.</span>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Enter Playlist URL</h3>
+            <p>Once you are in our tool, you will find a input at the top of the website. Just paste the url you have copied.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Enter Start & End video numbers (Optional)</h3>
+            <p>If you want to calculate the length between videos in Youtube Playlist, you can enter the start & end video numbers. This step is completely optional.</p>
+            <div class="tip-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span>Use-case: If you are learning with a youtube playlist or listening to a music & assume the playlist has 27 videos/songs. You have watched 8 videos so far and want to calculate the length of remaining videos, you can enter the start and end video numbers for that scenario, you can enter the start and end numbers.</span>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3>Click the Calculate button</h3>
+            <p>Just click the "Calculate" button and you will get the YouTube Playlist length immediately. You can repeat this for any number of playlists, there is no restrictions.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features-section">
+        <h2 class="section-title">YouTube Playlist Length Features</h2>
+        <p class="section-subtitle">The core functionality of our tool is to find the Youtube Playlist Length but we don't stop there. Apart from finding Youtube Playlist Length, we offer wide variety of features like different playback speeds, average video duration to the playlist, Sort Youtube playlist & other video stats.</p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>YouTube Playlist Length</h3>
+            <p>Calculate length of any YouTube Playlist accurately. Along with playlist length, get the average duration of a video in the YouTube Playlist</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Simple, Fast & Free</h3>
+            <p>Our tool is very simple to use, fast to get the result & free forever. Do sign up needed and No daily limit. Unlimited Playlists everyday.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⏩</div>
+            <h3>Different Playback Speed</h3>
+            <p>Our tool gives the YouTube Playlist Length for different playback speeds like 1x, 1.25x, 1.5x, 1.75x & 2x</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Find the length for a specific range</h3>
+            <p>You can specify the start & End video numbers and get the Playlist Length calculated for that specific range of videos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="faq-section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Here are the most commonly asked questions from our users! If you have any other question in mind, do not hesitate to reach us out.</p>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-number">1</span>
+              <span>Is there any daily limit of YouTube Playlist in our tool?</span>
+              <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>✅ No. There is no daily limit in our tool. You can use unlimited playlists everyday.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-number">2</span>
+              <span>What playback speeds are supported in our tool?</span>
+              <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>✅ We support the normal speed (1x) as well as faster speed options like 1.25x, 1.5x, 1.75x, and 2x.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-number">3</span>
+              <span>Is our tool free to use?</span>
+              <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>✅ Yes, our tool is completely free to use! We don't have any paid plans and all the advanced features are available for free.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-number">4</span>
+              <span>Do I need to sign up to use our tool?</span>
+              <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>✅ No, you can use our tool to calculate YouTube Playlist Length without a sign up.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-number">5</span>
+              <span>Is there a limit on the number of videos in a playlist?</span>
+              <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>✅ No, there are no restrictions on the number of videos, our tool works with playlists of any size.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-number">6</span>
+              <span>Can I use our tool for educational playlists?</span>
+              <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>✅ Yes, we designed our tool to work with any playlist including educational playlists. You can also find the length between specific videos using our tool. This helps to plan your time productively.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Footer -->
       <footer class="footer">
-        Powered by YouTube Data API v3 • Spring Boot Backend
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="logo-badge">
+              <svg width="24" height="18" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27.42 3.12C27.11 1.95 26.21 1.05 25.04 0.74C22.88 0.18 14 0.18 14 0.18C14 0.18 5.12 0.18 2.96 0.74C1.79 1.05 0.89 1.95 0.58 3.12C0.02 5.28 0.02 10 0.02 10C0.02 10 0.02 14.72 0.58 16.88C0.89 18.05 1.79 18.95 2.96 19.26C5.12 19.82 14 19.82 14 19.82C14 19.82 22.88 19.82 25.04 19.26C26.21 18.95 27.11 18.05 27.42 16.88C27.98 14.72 27.98 10 27.98 10C27.98 10 27.98 5.28 27.42 3.12Z" fill="#FF0000"/>
+                <path d="M11.18 14.18L18.54 10L11.18 5.82V14.18Z" fill="white"/>
+              </svg>
+              <span>Playlist Length Calculator</span>
+            </div>
+            <p class="footer-desc">The best free tool to find the Youtube playlist length with lot of advanced features.</p>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>Tools</h4>
+              <ul>
+                <li><a href="#calculator">YouTube Playlist Length</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Resources</h4>
+              <ul>
+                <li><a href="#faq">Frequently Asked Questions</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Legal</h4>
+              <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Made with ❤️ for Community • Powered by YouTube Data API v3 & Spring Boot</p>
+        </div>
       </footer>
     </main>
   </div>
