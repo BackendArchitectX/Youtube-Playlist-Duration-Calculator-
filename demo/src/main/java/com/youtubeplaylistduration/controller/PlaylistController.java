@@ -3,20 +3,26 @@ package com.youtubeplaylistduration.controller;
 import com.youtubeplaylistduration.model.PlaylistDuration;
 import com.youtubeplaylistduration.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/playlist") // Base path for all endpoints in this controller
+@RequestMapping("/api/playlist")
+@CrossOrigin(origins = "*")
 public class PlaylistController {
 
     @Autowired
     private PlaylistService playlistService;
 
-    @GetMapping("/duration") // Maps to /api/playlist/duration
-    public PlaylistDuration getPlaylistDuration(@RequestParam String playlistId) {
-        return playlistService.calculatePlaylistDuration(playlistId);
+    /**
+     * Get playlist duration with optional range
+     * Supports both full playlist and custom range in single endpoint
+     */
+    @GetMapping("/duration")
+    public PlaylistDuration getPlaylistDuration(
+        @RequestParam String playlistId,
+        @RequestParam(required = false) Integer fromIndex,
+        @RequestParam(required = false) Integer toIndex) {
+    return playlistService.calculatePlaylistDuration(playlistId, fromIndex, toIndex);
     }
+
 }
